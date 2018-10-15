@@ -6,6 +6,10 @@ export default (state = {}, action) => {
       return Object.assign({}, state, {
         [action.payload.name]: action.payload.category
       });
+    case actions.MOVIE_REMOVE:
+      const newState = Object.assign({}, state);
+      delete newState[action.name];
+      return newState;
     default:
       return state;
   }

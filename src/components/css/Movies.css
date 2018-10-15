@@ -36,3 +36,12 @@
 .rating-stars {
   line-height: 24px;
 }
+
+select {
+  text-transform: capitalize;
+}
+
+.inactive {
+  color: #AAAAAA;
+  font-weight: 100;
+}

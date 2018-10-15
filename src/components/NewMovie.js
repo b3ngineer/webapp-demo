@@ -3,18 +3,32 @@ import { Row, Col } from "react-flexbox-grid";
 import MovieCategory from "./MovieCategory";
 import { connect } from "react-redux";
 import "./css/Movies.css";
-import { movies, app } from "../store/actions";
+import { movies } from "../store/actions";
 
 const { addMovie } = movies;
-const { updateMovieName } = app;
 
 class NewMovie extends Component {
+  clear = () => {
+    this.newCategory = "";
+    document.getElementById("new-name").value = this.newName = "";
+    document.getElementById("new-category").selectedIndex = 0;
+  };
+
   handleSaveClick = () => {
-    this.props.addMovie("Test", "123");
+    // TODO: handle missing this.newCategory
+    if (this.newName) {
+      this.props.addMovie(this.newName, this.newCategory);
+      this.clear();
+    }
   };
 
   handleNameChange = e => {
-    this.props.updateMovieName(e.currentTarget.value);
+    this.newName = e.currentTarget.value;
+  };
+
+  handleCategoryChange = e => {
+    const select = e.currentTarget;
+    this.newCategory = select.options[select.selectedIndex].value;
   };
 
   render() {
@@ -29,14 +43,25 @@ class NewMovie extends Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={2}> </Col>
+          <Col xs={2}>
+            <div />
+          </Col>
           <Col xs={5}>
-            <input className="full-width" onChange={this.handleNameChange} />
+            <input
+              id="new-name"
+              className="full-width"
+              onChange={this.handleNameChange}
+            />
           </Col>
           <Col xs={2}>
-            <MovieCategory />
+            <MovieCategory
+              id="new-category"
+              onChange={this.handleCategoryChange}
+            />
           </Col>
-          <Col xs={3}> </Col>
+          <Col xs={3}>
+            <div />
+          </Col>
         </Row>
         <Row>
           <Col xs={2}>
@@ -49,7 +74,9 @@ class NewMovie extends Component {
             >
               Save
             </span>
-            <span className="control">Cancel</span>
+            <span className="control" onClick={this.clear}>
+              Cancel
+            </span>
           </Col>
         </Row>
       </React.Fragment>
@@ -59,5 +86,5 @@ class NewMovie extends Component {
 
 export default connect(
   null,
-  { addMovie, updateMovieName }
+  { addMovie }
 )(NewMovie);
