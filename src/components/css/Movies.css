@@ -1,0 +1,38 @@
+.movies {
+  margin: 2em;
+  max-width: 700px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-smaller {
+  font-size: smaller;
+}
+
+.control {
+  text-decoration: underline;
+  color: #0077ff;
+  cursor: pointer;
+}
+
+.space-bottom {
+  margin-bottom: 0.5em;
+}
+
+.space-top {
+  margin-top: 1.5em;
+}
+
+.space-right {
+  margin-right: 1em;
+}
+
+.rating-stars {
+  line-height: 24px;
+}
