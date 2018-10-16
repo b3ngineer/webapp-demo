@@ -3,21 +3,21 @@ import PropTypes from "prop-types";
 import "./css/Movies.css";
 
 const MovieCategory = props => {
-  return (
-    <select id={props.id} onChange={props.onChange}>
+  const { onChange, selected } = props;
+  return onChange ? (
+    <select id={props.id} value={selected} onChange={onChange}>
       <option value="">-- select one --</option>
       {["action", "comedy", "drama", "horror", "indie", "romance"].map(
-        value =>
-          props.selected === value ? (
-            <option key={value} value={value} selected>
-              {value}
-            </option>
-          ) : (
-            <option key={value} value={value}>
-              {value}
-            </option>
-          )
+        value => (
+          <option key={value} value={value}>
+            {value}
+          </option>
+        )
       )}
+    </select>
+  ) : (
+    <select id={props.id} value={selected} readOnly>
+      <option value={selected}>{selected}</option>
     </select>
   );
 };
@@ -25,7 +25,7 @@ const MovieCategory = props => {
 MovieCategory.propTypes = {
   id: PropTypes.string,
   selected: PropTypes.string,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func
 };
 
 MovieCategory.defaultProps = {

@@ -1,5 +1,6 @@
 import { combineReducers, applyMiddleware, compose, createStore } from "redux";
 import { connectRouter, routerMiddleware } from "connected-react-router";
+import { responsiveStoreEnhancer } from "redux-responsive";
 import createSagaMiddleware from "redux-saga";
 import * as reducers from "./reducers";
 import rootSaga from "./sagas";
@@ -12,7 +13,10 @@ export default (history, initialState) => {
   const store = createStore(
     connectRouter(history)(rootReducer),
     initialState,
-    composeEnhancers(applyMiddleware(sagaMiddleware, routerMiddleware(history)))
+    composeEnhancers(
+      responsiveStoreEnhancer,
+      applyMiddleware(sagaMiddleware, routerMiddleware(history))
+    )
   );
   sagaMiddleware.run(rootSaga);
   return store;

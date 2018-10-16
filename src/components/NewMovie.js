@@ -27,47 +27,46 @@ class NewMovie extends Component {
   };
 
   handleCategoryChange = e => {
-    const select = e.currentTarget;
-    this.newCategory = select.options[select.selectedIndex].value;
+    this.newCategory = e.currentTarget.value;
   };
 
   render() {
     return (
       <React.Fragment>
         <Row>
-          <Col xs={2}>
+          <Col xs={1} sm={2} md={2}>
             <div className="space-bottom" />
           </Col>
-          <Col xs={10}>
+          <Col xs={11} sm={10} md={10}>
             <div className="space-bottom">New Movie:</div>
           </Col>
         </Row>
         <Row>
-          <Col xs={2}>
+          <Col xs={1} sm={2} md={2}>
             <div />
           </Col>
-          <Col xs={5}>
+          <Col xs={4} sm={4} md={5}>
             <input
               id="new-name"
               className="full-width"
               onChange={this.handleNameChange}
             />
           </Col>
-          <Col xs={2}>
+          <Col xs={2} sm={2} md={2}>
             <MovieCategory
               id="new-category"
               onChange={this.handleCategoryChange}
             />
           </Col>
-          <Col xs={3}>
+          <Col xs={5} sm={4} md={3}>
             <div />
           </Col>
         </Row>
         <Row>
-          <Col xs={2}>
+          <Col xs={1} sm={2} md={2}>
             <div />
           </Col>
-          <Col xs={10}>
+          <Col xs={11} sm={10} md={10}>
             <span
               className="control space-right"
               onClick={this.handleSaveClick}

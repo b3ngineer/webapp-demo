@@ -7,6 +7,10 @@
   width: 100%;
 }
 
+.center {
+  text-align: center;
+}
+
 .text-right {
   text-align: right;
 }
@@ -43,6 +47,7 @@
 
 select {
   text-transform: capitalize;
+  min-width: 120px;
 }
 
 .inactive {
