@@ -32,7 +32,7 @@ const MovieRating = props => {
       rating={props.rating}
       starDimension={starDimension}
       starSpacing={starSpacing}
-      starRatedColor={gray}
+      starRatedColor={yellow}
       starHoverColor={gray}
       starEmptyColor={gray}
     />
