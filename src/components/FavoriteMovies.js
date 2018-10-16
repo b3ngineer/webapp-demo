@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "react-flexbox-grid";
 import MovieCategory from "./MovieCategory";
-import ReactStars from "react-stars";
+import StarRatings from "react-star-ratings";
 import "./css/Movies.css";
 import { movies } from "../store/actions";
 
-const { removeMovie } = movies;
+const { removeMovie, rateMovie } = movies;
 
 class FavoriteMovies extends Component {
-  handleStarChange = value => {
-    console.log(value);
+  handleStarChange = (rating, name) => {
+    this.props.rateMovie(name, rating);
   };
 
   handleCategoryChange = e => {
@@ -26,6 +26,10 @@ class FavoriteMovies extends Component {
 
   render() {
     const favorites = Object.getOwnPropertyNames(this.props.favorites);
+    const yellow = "rgb(255, 226, 43)";
+    const gray = "rgb(165, 165, 165)";
+    const starDimension = "20px";
+    const starSpacing = "2px";
     return (
       <React.Fragment>
         <Row>
@@ -36,39 +40,49 @@ class FavoriteMovies extends Component {
             <div className="space-bottom">My favorite movies.</div>
           </Col>
           <Col xs={3}>
-            <div className="space-bottom">Rating.</div>
+            <div
+              className="space-bottom"
+              style={{ textAlign: "center", marginLeft: "-1em" }}
+            >
+              Rating.
+            </div>
           </Col>
         </Row>
         {favorites.length ? (
           favorites.map(name => (
             <Row key={name}>
               <Col xs={2}>
-                <span
+                <div
                   className="text-right control text-smaller"
                   onClick={this.handleRemoveMovie}
                   data-name={name}
                 >
                   (remove)
-                </span>
+                </div>
               </Col>
               <Col xs={5}>
-                <input className="full-width" value={name} disabled />
+                <input className="full-width" value={name} readOnly />
               </Col>
               <Col xs={2}>
                 <MovieCategory
-                  selected={this.props.favorites[name]}
+                  selected={this.props.favorites[name].category}
                   name={name}
                   onChange={this.handleCategoryChange}
                 />
               </Col>
               <Col xs={3}>
-                <ReactStars
-                  count={5}
-                  className="rating-stars"
-                  onChange={this.handleStarChange}
-                  size={24}
-                  color2={"#ffd700"}
-                />
+                <div className="space-left">
+                  <StarRatings
+                    changeRating={this.handleStarChange}
+                    rating={this.props.favorites[name].rating}
+                    starDimension={starDimension}
+                    starSpacing={starSpacing}
+                    starRatedColor={yellow}
+                    starHoverColor={yellow}
+                    starEmptyColor={gray}
+                    name={name}
+                  />
+                </div>
               </Col>
             </Row>
           ))
@@ -83,12 +97,15 @@ class FavoriteMovies extends Component {
               </div>
             </Col>
             <Col xs={3}>
-              <ReactStars
-                count={5}
-                className="rating-stars"
-                size={24}
-                edit={false}
-              />
+              <div className="space-left">
+                <StarRatings
+                  starDimension={starDimension}
+                  starSpacing={starSpacing}
+                  starRatedColor={gray}
+                  starHoverColor={gray}
+                  starEmptyColor={gray}
+                />
+              </div>
             </Col>
           </Row>
         )}
@@ -101,5 +118,5 @@ export default connect(
   state => ({
     favorites: state.movies
   }),
-  { removeMovie }
+  { removeMovie, rateMovie }
 )(FavoriteMovies);
