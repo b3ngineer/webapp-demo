@@ -45,7 +45,7 @@ class FavoriteMovies extends Component {
             <Row key={name}>
               <Col xs={1} sm={2} md={2}>
                 <div
-                  className="text-right control text-smaller"
+                  className="text-right control"
                   onClick={this.handleRemoveMovie}
                   data-name={name}
                 >
