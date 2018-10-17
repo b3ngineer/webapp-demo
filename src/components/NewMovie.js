@@ -3,14 +3,11 @@ import { Row, Col } from "react-flexbox-grid";
 import MovieCategory from "./MovieCategory";
 import { connect } from "react-redux";
 import "./css/Movies.css";
-import { movies } from "../store/actions";
+import { movies, app } from "../store/actions";
 import "react-notifications/lib/notifications.css";
-import {
-  NotificationContainer,
-  NotificationManager
-} from "react-notifications";
 
 const { addMovie } = movies;
+const { triggerError, triggerWarning } = app;
 
 class NewMovie extends Component {
   clear = () => {
@@ -21,26 +18,20 @@ class NewMovie extends Component {
 
   handleSaveClick = () => {
     if (!this.newName) {
-      return NotificationManager.warning(
-        "Please fill in the movie name to continue",
-        "Oops! You can't save yet...",
-        5000
+      return this.props.triggerWarning(
+        "Please fill in the movie name to continue"
       );
     }
 
     if (!this.validName()) {
-      return NotificationManager.error(
-        "The movie name contains invalid characters",
-        "Oops! You can't save yet...",
-        5000
+      return this.props.triggerError(
+        "The movie name contains invalid characters"
       );
     }
 
     if (!this.newCategory) {
-      return NotificationManager.warning(
-        "Please select a category to continue",
-        "Oops! You can't save yet...",
-        5000
+      return this.props.triggerWarning(
+        "Please select a category before saving"
       );
     }
 
@@ -55,10 +46,8 @@ class NewMovie extends Component {
   handleNameChange = e => {
     this.newName = e.currentTarget.value;
     if (!this.validName()) {
-      NotificationManager.error(
-        "Invalid character",
-        "Only letters and numbers are allowed",
-        5000
+      this.props.triggerError(
+        "Only letters and numbers are allowed in movie names"
       );
     }
   };
@@ -70,7 +59,6 @@ class NewMovie extends Component {
   render() {
     return (
       <React.Fragment>
-        <NotificationContainer />
         <Row>
           <Col xs={1} sm={2} md={2}>
             <div className="space-bottom" />
@@ -123,5 +111,5 @@ class NewMovie extends Component {
 
 export default connect(
   null,
-  { addMovie }
+  { addMovie, triggerError, triggerWarning }
 )(NewMovie);

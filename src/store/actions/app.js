@@ -1,9 +1,13 @@
 const actions = {
-  APP_FORM_MOVIE_NAME: "APP_FORM_MOVIE_NAME",
-  APP_ERROR: "APP_ERROR",
-  updateMovieName: name => ({
-    type: actions.APP_FORM_MOVIE_NAME,
-    name
+  ERROR: "ERROR",
+  WARNING: "WARNING",
+  triggerError: error => ({
+    type: actions.ERROR,
+    error
+  }),
+  triggerWarning: warning => ({
+    type: actions.WARNING,
+    warning
   })
 };
 export default actions;

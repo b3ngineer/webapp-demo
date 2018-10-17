@@ -14,9 +14,9 @@ const actions = {
     type: actions.MOVIE_REMOVE,
     name
   }),
-  rateMovie: (name, rating) => ({
+  rateMovie: (name, category, rating) => ({
     type: actions.MOVIE_RATE,
-    payload: { name, rating }
+    payload: { name, category, rating }
   })
 };
 export default actions;

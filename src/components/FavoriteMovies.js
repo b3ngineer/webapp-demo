@@ -10,7 +10,8 @@ const { removeMovie, rateMovie } = movies;
 
 class FavoriteMovies extends Component {
   handleStarChange = (rating, name) => {
-    this.props.rateMovie(name, rating);
+    const category = this.props.favorites[name].category;
+    this.props.rateMovie(name, category, rating);
   };
 
   handleRemoveMovie = e => {

@@ -8,7 +8,7 @@ function* removeMovie(action) {
     const result = yield call(handleMovieRemove, action.name);
     yield put({ type: actions.MOVIE_REMOVE_SUCCESS, result });
   } catch (e) {
-    yield put({ type: actions.MOVIE_ERROR, error: e.message });
+    yield put({ type: "ERROR", error: e.message });
   }
 }
 
