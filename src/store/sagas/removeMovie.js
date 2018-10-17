@@ -1,7 +1,19 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import actions from "../actions/movies";
+import axios from "axios";
+import config from "./config";
 
-const handleMovieRemove = name => {};
+const { api, apiKey } = config;
+
+const handleMovieRemove = name =>
+  axios.delete(api, {
+    headers: {
+      "x-api-key": apiKey
+    },
+    data: {
+      name
+    }
+  });
 
 function* removeMovie(action) {
   try {
