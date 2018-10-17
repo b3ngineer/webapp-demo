@@ -1,4 +1,6 @@
 const actions = {
+  MOVIE_LIST: "MOVIE_LIST",
+  MOVIE_LIST_SUCCESS: "MOVIE_LIST_SUCCESS",
   MOVIE_ADD: "MOVIE_ADD",
   MOVIE_ADD_SUCCESS: "MOVIE_ADD_SUCCESS",
   MOVIE_REMOVE: "MOVIE_REMOVE",
@@ -6,6 +8,9 @@ const actions = {
   MOVIE_RATE: "MOVIE_RATE",
   MOVIE_RATE_SUCCESS: "MOVIE_RATE_SUCCESS",
   MOVIE_ERROR: "MOVIE_ERROR",
+  listMovies: () => ({
+    type: actions.MOVIE_LIST
+  }),
   addMovie: (name, category) => ({
     type: actions.MOVIE_ADD,
     payload: { name, category }

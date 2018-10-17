@@ -3,6 +3,8 @@ import actions from "../actions/movies";
 export default (state = {}, action) => {
   let name = "";
   switch (action.type) {
+    case actions.MOVIE_LIST_SUCCESS:
+      return Object.assign({}, state, action.result);
     case actions.MOVIE_ADD:
       name = action.payload.name;
       return Object.assign({}, state, {
